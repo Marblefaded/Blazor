@@ -1,4 +1,6 @@
 ﻿@page "/resume"
+@inherits ResumeViewModel
+
 
 <style>
     button {
@@ -40,24 +42,44 @@
 </div>
 <div class="header-title">
     <div class="username">
-        <h3>
-            <span>
-                <div class="tahomal">
+
+        <div class="tahomal">
+            @currentHeading
+            @if (value)
+            {
+                <h3>
                     <b>
-                        Ситников Владимир Михайлович
+                        @data.Name
                     </b>
-                </div>
-                <div class="tahomar">
-                    <img src="dog.jpg" width="130px" height="100px">
-                </div>
-            </span>
-        </h3>
+                </h3>
+            }
+            else
+            {
+                <input type="text" size="20" @bind="@data.Name">
+                <button class="save" @onclick="(() => saveInfo(data))">
+                    Save
+                </button>
+            }
+        </div>
+        <div class="tahomar">
+            <img src="dog.jpg" width="130" height="100">
+        </div>
     </div>
     <br>
     <br>
     <div class="tahoma">
         <span>
-            Male,
+            @if (value)
+            {
+                @data.Gender
+            }
+            else
+            {
+                <input type="text" size="20" @bind="@data.Gender">
+                <button class="save" @onclick="(() => saveInfo(data))">
+                    Save
+                </button>
+            }
         </span>
         <span>
             21
@@ -65,19 +87,16 @@
         </span>
         <span>
             born on 6&nbsp;November&nbsp;2001
-        </span>
-        <span>
-
-        </span>
+        </span> 
     </div>
     <div class="tahoma">
-        <button>
+        <button @onclick="(() => pushInfo())">
             <small>
                 Edit
             </small>
         </button>
     </div>
-    <br>    
+    <br>
 </div>
 
 @*Блок с контактами*@
@@ -94,21 +113,41 @@
     </div>
     <div class="number">
         <span>
-            +79991787565
+            @if (value)
+            {
+                @data.Number
+            }
+            else
+            {
+                <input type="text" size="20" @bind="@data.Number">
+                <button class="save" @onclick="(() => saveInfo(data))">
+                    Save
+                </button>
+            }
         </span>
     </div>
     <div>
         <div class="tahoma">
-            <a class="email" href="mailto:greentuborg0@gmail.com">
+            <a class="email" href="mailto:@data.Email">
                 <span>
-                    greentuborg0@gmail.com
+                    @if (value)
+                    {
+                        @data.Email
+                    }
+                    else
+                    {
+                        <input type="text" size="20" @bind="@data.Email">
+                        <button class="save" @onclick="(() => saveInfo(data))">
+                            Save
+                        </button>
+                    }
                 </span>
             </a>
             — preferred means of communication
         </div>
     </div>
     <div class="tahoma">
-        <button>
+        <button @onclick="(() => pushInfo())">
             <small>
                 Edit
             </small>
@@ -121,18 +160,38 @@
 <div class="address">
     <div class="tahoma">
         <span>
-            Novosibirsk,
+            @if (value)
+            {
+                @data.Address
+            }
+            else
+            {
+                <input type="text" size="20" @bind="@data.Address">
+                <button class="save" @onclick="(() => saveInfo(data))">
+                    Save
+                </button>
+            }
         </span>
         <span>
             metro
         </span>
         <span style="color:rgb(205,5,5);">
-            station Oktyabrskaya
+            @if (value)
+            {
+                @data.Metro
+            }
+            else
+            {
+                <input type="text" size="20" @bind="@data.Metro">
+                <button class="save" @onclick="(() => saveInfo(data))">
+                    Save
+                </button>
+            }
         </span>
         <span>
             not willing to relocate, not prepared for business trips
         </span>
-        <button>
+        <button @onclick="(() => pushInfo())">
             <small>
                 Edit
             </small>
@@ -160,7 +219,7 @@
                 </b>
             </div>
         </div>
-        
+
     </h3>
 </div>
 <div class="resume-block-container">
@@ -264,19 +323,19 @@
             </span>
         </h3>
     </div>
-        <div class="tahomal">
-            2024
-        </div>
-        <div class="tahomar"
-            <b>
+    <div class="tahomal">
+        2024
+    </div>
+    <div class="tahomar">
+        <b>
 
-                Siberian State University Of Telecommunications And Information Science
-                <br>
-            </b>
-            Сomputer science and engineering
-        </div>
-        <br>
-        <br>
+            Siberian State University Of Telecommunications And Information Science
+            <br>
+        </b>
+        Сomputer science and engineering
+    </div>
+    <br>
+    <br>
 </div>
 
 @*Блок с языками*@
@@ -284,7 +343,7 @@
     <h3 style="color:grey">
         <div class="tahoma">
             <span>
-                    Languages
+                Languages
             </span>
             <button>Edit</button>
         </div>
@@ -306,3 +365,7 @@
         </div>
     </div>
 </div>
+
+@code {
+    string item = "hello";
+}
