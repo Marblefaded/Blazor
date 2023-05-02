@@ -8,6 +8,5 @@
         public string? Gender { get; set; }
         public string? Number { get; set; }
         public string? Metro{ get; set; }
-
     }
 }

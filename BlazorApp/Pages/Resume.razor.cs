@@ -56,7 +56,6 @@ namespace BlazorApp.Pages
                 fs.WriteAsync(array, 0, array.Length);
                 StateHasChanged();
             }
-
         }
 
         public void cancelInfo()
@@ -64,9 +63,6 @@ namespace BlazorApp.Pages
             value = false;
 
         }
-
-
-
     }
 
 }
