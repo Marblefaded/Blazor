@@ -1,4 +1,6 @@
 ﻿@page "/resume"
+@inherits ResumeViewModel
+
 
 <style>
     button {
@@ -8,6 +10,7 @@
 /*        padding: 16px; /* Поля вокруг текста */
        /* margin-bottom: 1rem; */
         font-size: 1.1vw;
+        padding: 0 10px;
     }
 </style>
 <style>
@@ -15,29 +18,68 @@
         font-family: 'Arial';
     }
 </style>
+<style>
+    div.tahomar {
+        font-family: 'Arial';
+        float: right;
+    }
+</style>
+<style>
+    div.tahomal {
+        font-family: 'Arial';
+        float: left;
+    }
+</style>
 
 
-
+@*Блок с данными*@
 <div class="resumeall">
     <a class="entertohome" href="">
-        <p class="tahoma">
+        <div class="tahoma">
             К списку резюме
-        </p>
+        </div>
     </a>
 </div>
 <div class="header-title">
     <div class="username">
-        <h3>
-            <span>
-                <p class="tahoma">
-                    Ситников Владимир Михайлович
-                </p>
-            </span>
-        </h3>
+
+        <div class="tahomal">
+            @currentHeading
+            @if (value)
+            {
+                <h3>
+                    <b>
+                        @data.Name
+                    </b>
+                </h3>
+            }
+            else
+            {
+                <input type="text" size="20" @bind="@data.Name">
+                <button class="save" @onclick="(() => saveInfo(data))">
+                    Save
+                </button>
+            }
+        </div>
+        <div class="tahomar">
+            <img src="dog.jpg" width="130" height="100">
+        </div>
     </div>
-    <p class="tahoma">
+    <br>
+    <br>
+    <div class="tahoma">
         <span>
-            Male,
+            @if (value)
+            {
+                @data.Gender
+            }
+            else
+            {
+                <input type="text" size="20" @bind="@data.Gender">
+                <button class="save" @onclick="(() => saveInfo(data))">
+                    Save
+                </button>
+            }
         </span>
         <span>
             21
@@ -45,58 +87,116 @@
         </span>
         <span>
             born on 6&nbsp;November&nbsp;2001
-        </span>
-        <span>
-
-        </span>
-    </p>
-    <p class="tahoma">
-        <button>Edit</button>
-    </p>
+        </span>   
+        </div>
+    <div class="tahoma">
+        <button @onclick="(() => pushInfo())">
+            <small>
+                Edit
+            </small>
+        </button>
+    </div>
+    <br>
 </div>
+
+@*Блок с контактами*@
 <div class="header-contact">
     <div class="contact">
         <span style="color:grey">
-            <p class="tahoma">
-                Contacts
-            </p>
+            <div class="tahoma">
+                <small>
+                    Contacts
+                </small>
+
+            </div>
         </span>
     </div>
     <div class="number">
         <span>
-            +79991787565
+            @if (value)
+            {
+                @data.Number
+            }
+            else
+            {
+                <input type="text" size="20" @bind="@data.Number">
+                <button class="save" @onclick="(() => saveInfo(data))">
+                    Save
+                </button>
+            }
         </span>
     </div>
     <div>
-        <p class="tahoma">
-            <a class="email" href="mailto:greentuborg0@gmail.com">
+        <div class="tahoma">
+            <a class="email" href="mailto:@data.Email">
                 <span>
-                    greentuborg0@gmail.com
+                    @if (value)
+                    {
+                        @data.Email
+                    }
+                    else
+                    {
+                        <input type="text" size="20" @bind="@data.Email">
+                        <button class="save" @onclick="(() => saveInfo(data))">
+                            Save
+                        </button>
+                    }
                 </span>
             </a>
             — preferred means of communication
-        </p>
+        </div>
     </div>
-    <p class="tahoma">
-        <button>Edit</button>
-    </p>
+    <div class="tahoma">
+        <button @onclick="(() => pushInfo())">
+            <small>
+                Edit
+            </small>
+        </button>
+    </div>
+    <br>
 </div>
+
+@*Блок с адресом*@
 <div class="address">
-    <p class="tahoma">
+    <div class="tahoma">
         <span>
-            Novosibirsk,
+            @if (value)
+            {
+                @data.Address
+            }
+            else
+            {
+                <input type="text" size="20" @bind="@data.Address">
+                <button class="save" @onclick="(() => saveInfo(data))">
+                    Save
+                </button>
+            }
         </span>
         <span>
             metro
         </span>
         <span style="color:rgb(205,5,5);">
-            station Oktyabrskaya
+            @if (value)
+            {
+                @data.Metro
+            }
+            else
+            {
+                <input type="text" size="20" @bind="@data.Metro">
+                <button class="save" @onclick="(() => saveInfo(data))">
+                    Save
+                </button>
+            }
         </span>
         <span>
             not willing to relocate, not prepared for business trips
         </span>
-        <button>Edit</button>
-    </p>
+        <button @onclick="(() => pushInfo())">
+            <small>
+                Edit
+            </small>
+        </button>
+    </div>
 </div>
 <hr>
 <div class="header-resume-pos">
@@ -248,3 +348,4 @@
         </p>
     </div>
 </div>
+
