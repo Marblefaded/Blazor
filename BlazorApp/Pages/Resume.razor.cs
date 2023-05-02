@@ -20,7 +20,7 @@ namespace BlazorApp.Pages
 
         public void pushInfo()
         {
-            
+
 
             if (!value)
             {
@@ -56,17 +56,13 @@ namespace BlazorApp.Pages
                 fs.WriteAsync(array, 0, array.Length);
                 StateHasChanged();
             }
-            
         }
 
         public void cancelInfo()
         {
             value = false;
-            
+
         }
-
-
-
     }
 
 }

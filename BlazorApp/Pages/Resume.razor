@@ -42,6 +42,7 @@
 </div>
 <div class="header-title">
     <div class="username">
+
         <div class="tahomal">
             @currentHeading
             @if (value)
@@ -86,7 +87,7 @@
         </span>
         <span>
             born on 6&nbsp;November&nbsp;2001
-        </span> 
+        </span>   
     </div>
     <div class="tahoma">
         <button @onclick="(() => pushInfo())">
@@ -144,6 +145,13 @@
             </a>
             — preferred means of communication
         </div>
+    </div>
+    <div class="tahoma">
+        <button @onclick="(() => pushInfo())">
+            <small>
+                Edit
+            </small>
+        </button>
     </div>
     <div class="tahoma">
         <button @onclick="(() => pushInfo())">

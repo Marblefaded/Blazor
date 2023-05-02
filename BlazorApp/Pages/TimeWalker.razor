@@ -1,0 +1,92 @@
+﻿@page "/timewalker"
+
+<h1>Timer</h1>
+<input type="text" size="20" @bind="@countert">
+<button @onclick="StartTimer">Start</button>
+@if (value)
+{
+    <button @onclick="StartTimer">Start</button>
+}
+else
+{
+    <button @onclick="StopTimer">Stop</button>
+}
+
+
+
+<h1>Stopwatch</h1>
+@counters
+<button @onclick="StartStopWatch">Start</button>
+@if (value)
+{
+    <button @onclick="StartStopWatch">Start</button>
+}
+else
+{
+    <button @onclick="StopWatch">Stop</button>
+}
+
+
+
+
+@code {
+    private static System.Timers.Timer aTimer;
+    private static System.Timers.Timer aWatch;
+    public int countert;
+    public int counters;
+    public bool value { get; set; }
+    public void StartTimer()
+    {
+        aTimer = new System.Timers.Timer(1000);
+        aTimer.Elapsed += CountDownTimer;
+        aTimer.Enabled = true;
+    }
+    public void StopTimer()
+    {
+        countert = 0;
+        aTimer.Enabled = false;
+    }
+
+    public void CountDownTimer(Object source, ElapsedEventArgs e)
+    {
+        if (countert > 0)
+        {
+            countert -= 1;
+        }
+        else
+        {
+            aTimer.Enabled = false;
+        }
+        InvokeAsync(StateHasChanged);
+    }
+
+    public void StartStopWatch()
+    {
+        aWatch = new System.Timers.Timer(1000);
+        aWatch.Elapsed += CountDownStopWatch;
+        aWatch.Enabled = true;
+    }
+
+    public void StopWatch()
+    {
+        counters = 0;
+        aWatch.Enabled = false;
+    }
+
+    public void CountDownStopWatch(Object source, ElapsedEventArgs e)
+    {
+        counters += 1;
+        InvokeAsync(StateHasChanged);
+    }
+
+
+    public void Dispose()
+    {
+        aTimer?.Dispose();
+        aWatch?.Dispose();
+    }
+
+
+
+
+}
